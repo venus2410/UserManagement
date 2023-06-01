@@ -17,7 +17,7 @@ namespace _67RoleBaseSecurity
             var config = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap<User, UserViewModel>().ReverseMap();
+                    cfg.CreateMap<User, UserModel>().ReverseMap();
                     cfg.CreateMap<Role, RoleViewModel>().ReverseMap();
                     //for update user
                     cfg.CreateMap<User, User>().ForMember(dest => dest.Password, opt => opt.Ignore());

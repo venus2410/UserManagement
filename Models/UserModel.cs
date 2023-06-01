@@ -8,22 +8,22 @@ using System.Web;
 
 namespace _67RoleBaseSecurity.Models
 {
-    public class UserViewModel
+    public class UserModel
     {
         public int? UserId { get; set; }
         [Required]
-        [Display(Name ="User name")]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
-        [Display(Name ="Last Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Display(Name ="Alias Name")]
+        [Display(Name = "Alias Name")]
         public string AliasName { get; set; }
         [Required]
         [EmailAddress]
@@ -48,5 +48,6 @@ namespace _67RoleBaseSecurity.Models
         public Nullable<bool> IsDeleted { get; set; }
         public List<string> RoleName { get; set; }
         public List<int> RoleId { get; set; }
+        
     }
 }

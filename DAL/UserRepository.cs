@@ -18,7 +18,7 @@ namespace _67RoleBaseSecurity.DAL
         UserManagementEntities2 db =new UserManagementEntities2();
         IMapper mapper = AutoMapperConfig.Mapper;
         MD5Hash mD5Hash= new MD5Hash();
-        public UserViewModel Validate(LoginViewModel model)
+        public UserModel Validate(LoginViewModel model)
         {
             string hashPassword=mD5Hash.ComputeMd5Hash(model.Password);
             User user=db.Users.Where(u => u.UserName == model.Username && u.Password == hashPassword).FirstOrDefault();
@@ -26,14 +26,14 @@ namespace _67RoleBaseSecurity.DAL
             {
                 return null;
             }
-            return mapper.Map<UserViewModel>(model);
+            return mapper.Map<UserModel>(model);
         }
-        public List<UserViewModel> GetAll()
+        public List<UserModel> GetAll()
         {
             var lstUser = db.Users.Where(u => u.IsDeleted == false).ToList();
-            var lstUserMdl= new List<UserViewModel>();
+            var lstUserMdl= new List<UserModel>();
             foreach(var user in lstUser) {
-                var userMdl=mapper.Map<UserViewModel>(user);
+                var userMdl=mapper.Map<UserModel>(user);
                 //var user_Role=db.User_Role.Where(u => u.UserId==user.UserId).ToList();
                 //var role = db.Roles.Where(r => user_Role.Where(m => m.RoleId == r.RoleId) != null);
                 //List<RoleViewModel> roleModel=mapper.Map<List<RoleViewModel>>(role);
@@ -49,10 +49,10 @@ namespace _67RoleBaseSecurity.DAL
             }
             return lstUserMdl;
         }
-        public UserViewModel GetById(int id)
+        public UserModel GetById(int id)
         {
             var user = db.Users.Where(u => u.UserId == id && u.IsDeleted == false).FirstOrDefault();
-            var userMdl= mapper.Map<UserViewModel>(user);
+            var userMdl= mapper.Map<UserModel>(user);
             foreach(User_Role ur in user.User_Role)
             {
                 userMdl.RoleId = new List<int>();
@@ -60,10 +60,11 @@ namespace _67RoleBaseSecurity.DAL
                 userMdl.RoleId.Add(ur.Role.RoleId);
                 userMdl.RoleName.Add(ur.Role.RoleName);
             }
+            userMdl.Password = "none show password";
 
             return userMdl;
         }
-        public bool AddUser(UserViewModel model)
+        public bool AddUser(UserModel model)
         {
             try
             {
@@ -115,33 +116,57 @@ namespace _67RoleBaseSecurity.DAL
             }
         }
 
-        public bool UpdateUser(UserViewModel model)
+        public bool UpdateUser(UserModel model)
         {
             try
             {
                 User user = db.Users.Find(model.UserId);
                 if (user == null) return false;
 
-                User newUser = mapper.Map<User>(model);
-                user = mapper.Map<User, User>(newUser);
+                //User newUser = mapper.Map<User>(model);
+                //user = mapper.Map<User, User>(newUser);
+                //db.Entry<User>(user).State = System.Data.Entity.EntityState.Modified;
+
+                user.UserName=model.UserName;
+                user.FirstName=model.FirstName;
+                user.LastName=model.LastName;
+                user.AliasName=model.AliasName;
+                user.Email=model.Email;
+                user.Phone=model.Phone;
+                user.Gender=model.Gender;
+                user.HiringDate=model.HiringDate;
+                user.BirthDay=model.BirthDay;
+                user.Address=model.Address;
+                user.JobTitle=model.JobTitle;
+                user.IsActive=model.IsActive;
+                user.CreateDate=model.CreateDate;
+                user.LastLoginDate=model.LastLoginDate;
+                user.LastUploadDate=model.LastUploadDate;
+
+
+
+                db.SaveChanges();
                 //update user_role?
-                //List<User_Role> oldUR=db.User_Role.Where(u=>u.UserId==user.UserId).ToList();
-                //List<User_Role> newUR=user.User_Role as List<User_Role>;
-                ////delete oldUR that not contain in newUR
-                //foreach(var ur in oldUR)
-                //{
-                //    if(!newUR.Any(m=>m.RoleId==ur.RoleId))
-                //    {
-                //        db.User_Role.Remove(ur);
-                //    }
-                //}
-                //foreach (var ur in newUR)
-                //{
-                //    if (!oldUR.Any(m => m.RoleId == ur.RoleId))
-                //    {
-                //        db.User_Role.Add(ur);
-                //    }
-                //}
+                List<User_Role> oldUR = db.User_Role.Where(u => u.UserId == user.UserId).ToList();
+                List<int> newURId = model.RoleId.ToList();
+                //delete oldUR that not contain in newUR
+                foreach (var ur in oldUR)
+                {
+                    if (!newURId.Any(m => m == ur.RoleId))
+                    {
+                        db.User_Role.Remove(ur);
+                    }
+                }
+                foreach (var ur in newURId)
+                {
+                    if (!oldUR.Any(m => m.RoleId == ur))
+                    {
+                        User_Role userRole=new User_Role();
+                        userRole.RoleId = ur;
+                        userRole.UserId= user.UserId;
+                        db.User_Role.Add(userRole);
+                    }
+                }
 
                 db.SaveChanges();
 

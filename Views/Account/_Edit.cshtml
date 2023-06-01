@@ -3,7 +3,7 @@
 @{
     AjaxOptions options = new AjaxOptions()
     {
-        Url = @Url.Action("Create", "Account"),
+        Url = @Url.Action("Edit", "Account"),
         HttpMethod = "post",
         OnSuccess = "success",
         OnFailure = "failure"
@@ -24,7 +24,7 @@
 
                     <div class="row">
                         <div class="col-sm-6 text-center">
-                            <h4 class="modal-title">Modal Header</h4>
+                            <h4 class="modal-title">Edit</h4>
                         </div>
                         <div class="col-sm-6">
                             <div class="TriSea-technologies-Switch pull-right">
@@ -41,7 +41,7 @@
 
                         <div class="col-sm-4">
 
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.UserId)
 
 
@@ -50,13 +50,7 @@
                                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            </div>
-
+                            @Html.HiddenFor(model=>model.Password)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -137,7 +131,7 @@
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-sm-6 text-center">
-                                <input type="submit" value="Create" class="btn btn-default btn-warning" />
+                                <input type="submit" value="Edit" class="btn btn-default btn-warning" />
                             </div>
                             <div class="col-sm-6 text-center">
                                 <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
