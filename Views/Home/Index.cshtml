@@ -1,0 +1,140 @@
+﻿@using _67RoleBaseSecurity.Models
+@using _67RoleBaseSecurity.DataModel
+@model IEnumerable<UserViewModel>
+
+
+@{
+    ViewBag.Title = "Index";
+    int i = 1;
+
+}
+<div id="modalWrapper">
+    @* Inject form here *@
+
+</div>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-default" onclick="createUser()">Open Modal</button>
+
+
+<!--Table-->
+<table class="table table-bordered table-striped table-responsive">
+    <tr>
+        <th>#</th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            Full Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HiringDate)
+        </th>
+        <th>
+            Roles
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastLoginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUploadDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @(item.FirstName+" "+item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HiringDate)
+            </td>
+            <td>
+                @foreach (string ur in item.RoleName)
+                {
+                    @Html.DisplayFor(d => ur);<br />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLoginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUploadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a href="#" onclick="editUser('@item.UserId')">Edit</a>
+            </td>
+        </tr>
+    }
+</table>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        function editUser(UserId) {
+            $.ajax({
+                url: '@Url.Action("Edit","Account")',
+                data: {"id":UserId},
+                success: function (data,status, req) {
+                    $('#modalWrapper').html(data);
+                    $('#createModal').modal('show');
+                }
+            });
+        }
+        function createUser() {
+            $.ajax({
+                url: '@Url.Action("Create","Account")',
+                success: function (data,status, req) {
+                    $('#modalWrapper').html(data);
+                    $('#createModal').modal('show');
+                }
+            });
+        }
+        function success() {
+            alert("Success");
+        }
+
+        function failure() {
+            alert("Failure");
+        }
+        $.validator.unobtrusive.parse("#form0");
+        //date picker
+        
+    </script>
+}
