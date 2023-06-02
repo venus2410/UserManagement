@@ -25,7 +25,7 @@ namespace _67RoleBaseSecurity.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserViewModel userModel = userRepository.Validate(model);
+                UserModel userModel = userRepository.Validate(model);
                 if (userModel == null)
                 {
                     ModelState.AddModelError("", "Wrong username or password");
@@ -69,7 +69,7 @@ namespace _67RoleBaseSecurity.Controllers
             return PartialView("_Create");
         }
         [HttpPost]
-        public ActionResult Create(UserViewModel model)
+        public ActionResult Create(UserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,24 @@ namespace _67RoleBaseSecurity.Controllers
         public PartialViewResult Edit(int id)
         {
             var model=userRepository.GetById(id);
-            return PartialView("_Create",model);
+            ViewBag.Roles = roleRepository.GetAll();
+            return PartialView("_Edit",model);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if(userRepository.UpdateUser(model))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(model);
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

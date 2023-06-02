@@ -14,7 +14,7 @@ namespace _67RoleBaseSecurity.Controllers
         IUserRepository userRepository=new UserRepository();
         public ActionResult Index()
         {
-            List<UserViewModel> users = userRepository.GetAll();
+            List<UserModel> users = userRepository.GetAll();
             return View(users);
         }
 

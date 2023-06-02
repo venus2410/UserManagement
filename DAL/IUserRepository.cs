@@ -9,11 +9,11 @@ namespace _67RoleBaseSecurity.DAL
 {
     public interface IUserRepository
     {
-        UserViewModel Validate(LoginViewModel model);
-        List<UserViewModel> GetAll();
-        UserViewModel GetById(int id);
-        bool AddUser(UserViewModel model);
+        UserModel Validate(LoginViewModel model);
+        List<UserModel> GetAll();
+        UserModel GetById(int id);
+        bool AddUser(UserModel model);
         bool DeleteUser(int id);
-        bool UpdateUser(UserViewModel model);
+        bool UpdateUser(UserModel model);
     }
 }
