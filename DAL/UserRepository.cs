@@ -37,10 +37,10 @@ namespace _67RoleBaseSecurity.DAL
                 //var user_Role=db.User_Role.Where(u => u.UserId==user.UserId).ToList();
                 //var role = db.Roles.Where(r => user_Role.Where(m => m.RoleId == r.RoleId) != null);
                 //List<RoleViewModel> roleModel=mapper.Map<List<RoleViewModel>>(role);
-                foreach(var ur in user.User_Role)
+                userMdl.RoleId = new List<int>();
+                userMdl.RoleName = new List<string>();
+                foreach (var ur in user.User_Role)
                 {
-                    userMdl.RoleId = new List<int>();
-                    userMdl.RoleName= new List<string>();
                     userMdl.RoleId.Add(ur.Role.RoleId);
                     userMdl.RoleName.Add(ur.Role.RoleName);
                 }
@@ -53,10 +53,12 @@ namespace _67RoleBaseSecurity.DAL
         {
             var user = db.Users.Where(u => u.UserId == id && u.IsDeleted == false).FirstOrDefault();
             var userMdl= mapper.Map<UserModel>(user);
-            foreach(User_Role ur in user.User_Role)
+
+            userMdl.RoleId = new List<int>();
+            userMdl.RoleName = new List<string>();
+
+            foreach (User_Role ur in user.User_Role)
             {
-                userMdl.RoleId = new List<int>();
-                userMdl.RoleName = new List<string>();
                 userMdl.RoleId.Add(ur.Role.RoleId);
                 userMdl.RoleName.Add(ur.Role.RoleName);
             }
