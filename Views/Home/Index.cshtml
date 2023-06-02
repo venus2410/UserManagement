@@ -12,13 +12,17 @@
     @* Inject form here *@
 
 </div>
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-default" onclick="createUser()">Open Modal</button>
+<div class="row" style="display:flex; vertical-align:central;">
+    <div class="col-sm-6 text-left">
+        <h2>User</h2>
+    </div>
+    <div class="col-sm-6 text-right" style="align-self:center">
+        <button type="button" class="btn btn-success btn-default" onclick="createUser()"><span class="glyphicon glyphicon-plus"></span> Add User</button>
+    </div>
+</div>
+<hr />
 
 
 <!--Table-->
@@ -93,7 +97,14 @@
                 @Html.DisplayFor(modelItem => item.LastUploadDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
+                @if (item.IsActive == true)
+                {
+                    <button type="button" class="btn btn-sm btn-success" disabled>Active</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-sm btn-warning" disabled>Inactive</button>
+                }
             </td>
             <td>
                 <a href="#" onclick="editUser('@item.UserId')">Edit</a>
@@ -137,6 +148,6 @@
         }
         $.validator.unobtrusive.parse("#form0");
         //date picker
-        
+
     </script>
 }
