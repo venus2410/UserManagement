@@ -28,7 +28,13 @@ namespace _67RoleBaseSecurity.DAL
             {
                 return null;
             }
-            return mapper.Map<UserModel>(model);
+            UserModel userMdl= mapper.Map<UserModel>(user);
+            userMdl.RoleName = new List<string>();
+            foreach(User_Role ur in user.User_Role)
+            {
+                userMdl.RoleName.Add(ur.Role.RoleName);
+            }
+            return userMdl;
         }
         public List<UserModel> GetAll()
         {
@@ -82,16 +88,19 @@ namespace _67RoleBaseSecurity.DAL
                 db.SaveChanges();
 
                 //add user_role
-                foreach(int rid in model.RoleId)
+                if (model.RoleId != null)
                 {
-                    Role r = db.Roles.Find(rid);
-                    if(r != null)
+                    foreach (int rid in model.RoleId)
                     {
-                        User_Role user_Role= new User_Role();
-                        user_Role.RoleId = rid;
-                        user_Role.UserId = user.UserId;
+                        Role r = db.Roles.Find(rid);
+                        if (r != null)
+                        {
+                            User_Role user_Role = new User_Role();
+                            user_Role.RoleId = rid;
+                            user_Role.UserId = user.UserId;
 
-                        db.User_Role.Add(user_Role);
+                            db.User_Role.Add(user_Role);
+                        }
                     }
                 }
                 
