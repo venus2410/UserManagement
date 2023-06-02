@@ -105,5 +105,14 @@ namespace _67RoleBaseSecurity.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult CheckExistingEmail(string email)
+        {
+             return Json(!userRepository.IsEmailExist(email), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CheckExistingUserName(string userName)
+        {
+            return Json(!userRepository.IsUserNameExist(userName), JsonRequestBehavior.AllowGet);
+        }
     }
 }

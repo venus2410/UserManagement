@@ -11,6 +11,9 @@
     List<RoleViewModel> roles = ViewBag.Roles as List<RoleViewModel>;
 }
 
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 @using (Ajax.BeginForm(options))
 {
@@ -26,7 +29,7 @@
                         <div class="col-sm-6 text-center">
                             <h4 class="modal-title">Edit</h4>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="modal-header">
@@ -58,7 +61,7 @@
                                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
-                            @Html.HiddenFor(model=>model.Password)
+                            @Html.HiddenFor(model => model.Password)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
