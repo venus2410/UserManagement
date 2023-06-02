@@ -23,46 +23,42 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     <div class="row">
-                        <div class="col-sm-6 text-left">
-                            <h4 class="modal-title">Edit User</h4>
+                        <div class="col-sm-6 text-center">
+                            <h4 class="modal-title">Edit</h4>
                         </div>
-
+                        
                     </div>
                 </div>
                 <div class="modal-header">
-                    <div class="row" style="display:flex; vertical-align:central;">
-                        <div class="col-sm-2 text-right">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                            </svg>
-                        </div>
-                        <div class="col-sm-4 text-left" style="align-self:center">
+                    <div class="row">
+                        <div class="col-sm-6 text-center">
                             <h4 class="modal-title">@Model.FirstName</h4>
                         </div>
-                        @*<div class="col-sm-6">
+                        <div class="col-sm-6">
                             <div class="TriSea-technologies-Switch pull-right">
                                 <input id="TriSeaSuccess" name="TriSea1" type="checkbox" />
                                 <label for="TriSeaSuccess" class="label-success"></label>
                             </div>
-                        </div>*@
+                        </div>
                     </div>
                 </div>
                 <div class="modal-body">
 
                     @Html.AntiForgeryToken()
-
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.UserId)
-
                     <div class="row">
+
                         <div class="col-sm-4">
+
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.UserId)
+
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
-                            @Html.HiddenFor(model => model.Password)
+                            @Html.HiddenFor(model=>model.Password)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -118,16 +114,12 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label" })
-                                @Html.ListBoxFor(model => model.RoleId, new MultiSelectList(roles, "RoleId", "RoleName"), new { @class = "form-control" })
+                                @Html.ListBoxFor(model => model.RoleId, new MultiSelectList(roles, "RoleId", "RoleName"), new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
-                                @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
-                           {
-                               new SelectListItem(){Text="Male", Value="m"},
-                               new SelectListItem(){Text="Female", Value="f"}
-                           }, new { @class = "form-control" })
+                                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                             </div>
 
@@ -139,22 +131,19 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label" })
-                                @Html.DropDownListFor(model => model.IsActive, new List<SelectListItem> {
-                                       new SelectListItem{Text="Yes",Value="true"},
-                                       new SelectListItem{Text="No",Value="false"}
-                           }, new { @class = "form-control" })
+                                @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                            <div class="col-sm-6 text-center">
+                                <input type="submit" value="Edit" class="btn btn-default btn-warning" />
                             </div>
-                            @*<div class="col-sm-6 text-center">
+                            <div class="col-sm-6 text-center">
                                 <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
-                            </div>*@
+                            </div>
                         </div>
                     </div>
 
