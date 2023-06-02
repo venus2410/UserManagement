@@ -15,5 +15,7 @@ namespace _67RoleBaseSecurity.DAL
         bool AddUser(UserModel model);
         bool DeleteUser(int id);
         bool UpdateUser(UserModel model);
+        bool IsEmailExist(string email);
+        bool IsUserNameExist(string userName);
     }
 }

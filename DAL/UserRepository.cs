@@ -9,6 +9,8 @@ using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography;
 using System.Text;
 using _67RoleBaseSecurity.Util;
+using System.Runtime.Serialization;
+using System.Web.Helpers;
 
 namespace _67RoleBaseSecurity.DAL
 {
@@ -180,6 +182,17 @@ namespace _67RoleBaseSecurity.DAL
             }
             
         }
-        
+
+        public bool IsEmailExist(string email)
+        {
+            var user = db.Users.Where(u => string.Equals(u.Email,email, StringComparison.CurrentCultureIgnoreCase));
+            return user != null;
+        }
+
+        public bool IsUserNameExist(string userName)
+        {
+            var user = db.Users.Where(u => string.Equals(u.UserName, userName, StringComparison.CurrentCultureIgnoreCase));
+            return user != null;
+        }
     }
 }
