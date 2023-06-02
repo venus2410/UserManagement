@@ -22,7 +22,7 @@ namespace _67RoleBaseSecurity
             AutoMapperConfig.Init();
         }
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
-        {
+      {
             HttpCookie authCookie= Request.Cookies.Get(FormsAuthentication.FormsCookieName);
             if (authCookie != null)
             {
