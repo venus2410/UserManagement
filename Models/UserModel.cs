@@ -37,15 +37,15 @@ namespace _67RoleBaseSecurity.Models
         public string Address { get; set; }
         public string JobTitle { get; set; }
         [DefaultValue(true)]
-        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsActive { get; set; } = true;
         [DataType(DataType.Date)]
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }=DateTime.Now;
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> LastUploadDate { get; set; }
         [DefaultValue(false)]
-        public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<bool> IsDeleted { get; set; } = false;
         public List<string> RoleName { get; set; }
         public List<int> RoleId { get; set; }
         
