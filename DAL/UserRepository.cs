@@ -192,16 +192,38 @@ namespace _67RoleBaseSecurity.DAL
             
         }
 
-        public bool IsEmailExist(string email)
+        public bool IsEmailExist(string email, int? id)
         {
-            var user = db.Users.Where(u => u.Email.ToUpper()==email.ToUpper()).FirstOrDefault();
-            return user != null;
+            if (id == null)
+            {
+                var user = db.Users.Where(u => u.Email.ToUpper() == email.ToUpper()).FirstOrDefault();
+                return user != null;
+            }
+            else
+            {
+                var user=db.Users.Where(u=>u.UserId==id).FirstOrDefault();
+                string oldEmail = user.Email;
+                if(oldEmail==email) return false;
+                var user1 = db.Users.Where(u => u.Email.ToUpper() == email.ToUpper()).FirstOrDefault();
+                return user1 != null;
+            }
         }
 
-        public bool IsUserNameExist(string userName)
+        public bool IsUserNameExist(string userName, int? id)
         {
-            var user = db.Users.Where(u => u.UserName.ToUpper() == userName.ToUpper()).FirstOrDefault();
-            return user != null;
+            if (id == null)
+            {
+                var user = db.Users.Where(u => u.UserName.ToUpper() == userName.ToUpper()).FirstOrDefault();
+                return user != null;
+            }
+            else
+            {
+                var user = db.Users.Where(u => u.UserId == id).FirstOrDefault();
+                string oldUserName = user.UserName;
+                if (oldUserName == userName) return false;
+                var user1 = db.Users.Where(u => u.UserName.ToUpper() == userName.ToUpper()).FirstOrDefault();
+                return user1 != null;
+            }
         }
     }
 }

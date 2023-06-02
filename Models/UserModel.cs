@@ -13,7 +13,7 @@ namespace _67RoleBaseSecurity.Models
     {
         public int? UserId { get; set; }
         [Required]
-        [Remote("IsValidUserName", "Account", ErrorMessage = "User Name already exists!")]
+        [Remote("IsValidUserName", "Account",AdditionalFields = "UserId", ErrorMessage = "User Name already exists!")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
         [Required]
@@ -29,7 +29,7 @@ namespace _67RoleBaseSecurity.Models
         public string AliasName { get; set; }
         [Required]
         [EmailAddress]
-        [Remote("IsValidEmail", "Account", ErrorMessage = "Email already exists!")]
+        [Remote("IsValidEmail", "Account",AdditionalFields = "UserId", ErrorMessage = "Email already exists!")]
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }

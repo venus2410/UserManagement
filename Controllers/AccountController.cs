@@ -117,16 +117,13 @@ namespace _67RoleBaseSecurity.Controllers
                 return View(model);
             }
         }
-        [CustomAuthentication]
-        [CustomAuthorization(Role = "admin")]
-        public ActionResult IsValidEmail(string email)
+        public ActionResult IsValidEmail(string email, [Bind(Prefix ="UserId")]int? id)
         {
-             return Json(!userRepository.IsEmailExist(email), JsonRequestBehavior.AllowGet);
+             return Json(!userRepository.IsEmailExist(email, id), JsonRequestBehavior.AllowGet);
         }
-        [CustomAuthorization(Role = "admin")]
-        public ActionResult IsValidUserName(string userName)
+        public ActionResult IsValidUserName(string userName, [Bind(Prefix = "UserId")]int? id)
         {
-            return Json(!userRepository.IsUserNameExist(userName), JsonRequestBehavior.AllowGet);
+            return Json(!userRepository.IsUserNameExist(userName, id), JsonRequestBehavior.AllowGet);
         }
     }
 }
