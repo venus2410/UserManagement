@@ -185,13 +185,13 @@ namespace _67RoleBaseSecurity.DAL
 
         public bool IsEmailExist(string email)
         {
-            var user = db.Users.Where(u => string.Equals(u.Email,email, StringComparison.CurrentCultureIgnoreCase));
+            var user = db.Users.Where(u => u.Email.ToUpper()==email.ToUpper()).FirstOrDefault();
             return user != null;
         }
 
         public bool IsUserNameExist(string userName)
         {
-            var user = db.Users.Where(u => string.Equals(u.UserName, userName, StringComparison.CurrentCultureIgnoreCase));
+            var user = db.Users.Where(u => u.UserName.ToUpper() == userName.ToUpper()).FirstOrDefault();
             return user != null;
         }
     }

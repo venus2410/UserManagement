@@ -106,11 +106,11 @@ namespace _67RoleBaseSecurity.Controllers
             }
         }
 
-        public ActionResult CheckExistingEmail(string email)
+        public ActionResult IsValidEmail(string email)
         {
              return Json(!userRepository.IsEmailExist(email), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CheckExistingUserName(string userName)
+        public ActionResult IsValidUserName(string userName)
         {
             return Json(!userRepository.IsUserNameExist(userName), JsonRequestBehavior.AllowGet);
         }
