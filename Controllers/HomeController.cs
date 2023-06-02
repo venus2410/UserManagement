@@ -9,9 +9,12 @@ using _67RoleBaseSecurity.Models;
 
 namespace _67RoleBaseSecurity.Controllers
 {
+    
     public class HomeController : Controller
     {
         IUserRepository userRepository=new UserRepository();
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public ActionResult Index()
         {
             List<UserModel> users = userRepository.GetAll();

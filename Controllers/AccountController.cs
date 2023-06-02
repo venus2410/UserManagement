@@ -1,4 +1,5 @@
-﻿using _67RoleBaseSecurity.DAL;
+﻿using _67RoleBaseSecurity.CustomSecurity;
+using _67RoleBaseSecurity.DAL;
 using _67RoleBaseSecurity.DataModel;
 using _67RoleBaseSecurity.Models;
 using System;
@@ -11,15 +12,18 @@ using System.Web.Security;
 
 namespace _67RoleBaseSecurity.Controllers
 {
+    
     public class AccountController : Controller
     {
         IUserRepository userRepository=new UserRepository();
         IRoleRepository roleRepository=new RoleRepository();
         // GET: Account
+        
         public ActionResult Login()
         {
             return View();
         }
+        
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
@@ -54,6 +58,7 @@ namespace _67RoleBaseSecurity.Controllers
             }
             return View(model);
         }
+        
         public ActionResult Unauthorize()
         {
             return View();
@@ -63,12 +68,16 @@ namespace _67RoleBaseSecurity.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public PartialViewResult Create()
         {
             ViewBag.Roles=roleRepository.GetAll();
             return PartialView("_Create");
         }
         [HttpPost]
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public ActionResult Create(UserModel model)
         {
             if (ModelState.IsValid)
@@ -82,7 +91,8 @@ namespace _67RoleBaseSecurity.Controllers
             else 
             { return View(model); }
         }
-
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public PartialViewResult Edit(int id)
         {
             var model=userRepository.GetById(id);
@@ -90,6 +100,8 @@ namespace _67RoleBaseSecurity.Controllers
             return PartialView("_Edit",model);
         }
         [HttpPost]
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public ActionResult Edit(UserModel model)
         {
             if (ModelState.IsValid)
@@ -105,11 +117,13 @@ namespace _67RoleBaseSecurity.Controllers
                 return View(model);
             }
         }
-
+        [CustomAuthentication]
+        [CustomAuthorization(Role = "admin")]
         public ActionResult IsValidEmail(string email)
         {
              return Json(!userRepository.IsEmailExist(email), JsonRequestBehavior.AllowGet);
         }
+        [CustomAuthorization(Role = "admin")]
         public ActionResult IsValidUserName(string userName)
         {
             return Json(!userRepository.IsUserNameExist(userName), JsonRequestBehavior.AllowGet);

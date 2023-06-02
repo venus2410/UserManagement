@@ -11,6 +11,8 @@ namespace _67RoleBaseSecurity.CustomSecurity
         public CustomPrincipal(string username) 
         {
             Identity=new GenericIdentity(username);
+            UserName=username;
+            RoleName = new List<string>();
         }
         public IIdentity Identity {
             get;
@@ -19,18 +21,19 @@ namespace _67RoleBaseSecurity.CustomSecurity
 
         public bool IsInRole(string role)
         {
-            if (role == RoleName)
+            foreach(string userRole in RoleName)
             {
-                return true;
+                if (role == userRole)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-        public string Name { get; set; }
-        public string Contact { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        public string RoleName { get; set; }
+        public List<string> RoleName { get; set; }
     }
 }

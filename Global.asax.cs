@@ -32,11 +32,13 @@ namespace _67RoleBaseSecurity
                 string[] userData = data.Split('|');
 
                 CustomPrincipal customPrincipal=new CustomPrincipal(userData[0]);
-                customPrincipal.Name = userData[1];
-                customPrincipal.Contact = userData[2];
+                customPrincipal.FirstName = userData[1];
+                customPrincipal.LastName = userData[2];
                 customPrincipal.Email = userData[3];
-                customPrincipal.RoleName = userData[4];
-
+                for(int i=4; i<userData.Length; i++)
+                {
+                    customPrincipal.RoleName.Add(userData[i]);
+                }
                 HttpContext.Current.User = customPrincipal;
             }
         }

@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     @*Tag-input*@
-    @RenderSection("Tagsinput",false)
+    @RenderSection("Tagsinput", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,10 +24,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Shopping", "Shopping", "Shopping")</li>
+
                     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                 </ul>
             </div>
+            
         </div>
     </div>
     <div class="container body-content">
