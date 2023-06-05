@@ -49,7 +49,7 @@ namespace _67RoleBaseSecurity.Controllers
                     HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket);
                     Response.Cookies.Add(cookie);
 
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Detail","Account");
                 }
             }
             else 
@@ -63,6 +63,7 @@ namespace _67RoleBaseSecurity.Controllers
         {
             return View();
         }
+        [CustomAuthentication]
         public ActionResult Detail()
         {
             return View();

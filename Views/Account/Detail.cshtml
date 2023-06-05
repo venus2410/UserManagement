@@ -1,7 +1,33 @@
-﻿
+﻿@using _67RoleBaseSecurity.DataModel 
+@using _67RoleBaseSecurity.CustomSecurity
 @{
     ViewBag.Title = "Detail";
+    var currUser = User as CustomPrincipal;
 }
 
 <h2>Detail</h2>
-
+<table class="table table-bordered table-hover table-responsive">
+    <tr>
+        <td>User Name</td>
+        <td>@currUser.UserName</td>
+    </tr>
+    <tr>
+        <td>First Name</td>
+        <td>@currUser.FirstName</td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>@currUser.LastName</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>@currUser.Email</td>
+    </tr>
+    <tr>
+        <td>Role(s)</td>
+        <td>@foreach (string r in currUser.RoleName)
+        {
+            @r @:<br />
+        }</td>
+    </tr>
+</table>
