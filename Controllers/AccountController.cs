@@ -63,6 +63,10 @@ namespace _67RoleBaseSecurity.Controllers
         {
             return View();
         }
+        public ActionResult Detail()
+        {
+            return View();
+        }
         public ActionResult Logout() 
         {
             FormsAuthentication.SignOut();
