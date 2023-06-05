@@ -34,14 +34,25 @@
                 </div>
                 <div class="modal-header">
                     <div class="row">
-                        <div class="col-sm-6 text-center">
-                            <h4 class="modal-title">@Model.FirstName</h4>
+                        <div class="col-sm-8">
+                            <h4 class="modal-title"><span class="glyphicon glyphicon-user"></span> @Model.FirstName</h4>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="TriSea-technologies-Switch pull-right">
-                                <input id="TriSeaSuccess" name="TriSea1" type="checkbox" />
-                                <label for="TriSeaSuccess" class="label-success"></label>
+                        <div class="col-sm-1">
+                            <div class="material-switch">
+                                @if ((bool)Model.IsActive)
+                                {
+                                    <input id="someSwitchOptionSuccess" name="@nameof(Model.IsActive)" type="checkbox" value="true" checked />
+                                }
+                                else
+                                {
+                                    <input id="someSwitchOptionSuccess" name="@nameof(Model.IsActive)" type="checkbox" value="true" />
+                                }
+                                <label for="someSwitchOptionSuccess" class="label-success"></label>
                             </div>
+                            <input name="@nameof(Model.IsActive)" type="hidden" value="false" />
+                        </div>
+                        <div class="col-sm-3">
+                            Active
                         </div>
                     </div>
                 </div>
@@ -117,7 +128,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label" })
-                                @Html.ListBoxFor(model => model.RoleId, new MultiSelectList(roles, "RoleId", "RoleName"), new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ListBoxFor(model => model.RoleId, new MultiSelectList(roles, "RoleId", "RoleName"), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
@@ -132,21 +143,21 @@
                                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                             </div>
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
-                            <div class="col-sm-6 text-center">
-                                <input type="submit" value="Edit" class="btn btn-default btn-warning" />
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" value="Save" class="btn btn-default btn-warning" />
                             </div>
-                            <div class="col-sm-6 text-center">
+                            @*<div class="col-sm-6 text-center">
                                 <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
 
