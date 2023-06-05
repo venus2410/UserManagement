@@ -135,7 +135,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="CustomSecurity\CustomAuthentication.cs" />
     <Compile Include="CustomSecurity\CustomAuthorization.cs" />
     <Compile Include="CustomSecurity\CustomPrincipal.cs" />
@@ -236,12 +235,11 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Account\Unauthorize.cshtml" />
-    <Content Include="Views\Shopping\Index.cshtml" />
-    <Content Include="Views\Shopping\Shopping.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_Create.cshtml" />
     <Content Include="Views\Account\_Edit.cshtml" />
     <Content Include="Views\Account\Detail.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
