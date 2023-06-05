@@ -1,5 +1,5 @@
 ﻿@using _67RoleBaseSecurity.CustomSecurity
-@{ 
+@{
     var currUser = User as CustomPrincipal;
 }
 <!DOCTYPE html>
@@ -11,8 +11,14 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!--Multiselect-->
+    @RenderSection("select", false)
+
     @*Tag-input*@
     @RenderSection("Tagsinput", false)
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -67,5 +73,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

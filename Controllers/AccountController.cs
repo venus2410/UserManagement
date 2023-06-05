@@ -91,7 +91,10 @@ namespace _67RoleBaseSecurity.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                return View(model);
+                else
+                {
+                    return View(model);
+                }
             }
             else 
             { return View(model); }
@@ -115,7 +118,10 @@ namespace _67RoleBaseSecurity.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                return View(model);
+                else
+                {
+                    return View(model);
+                }
             }
             else
             {

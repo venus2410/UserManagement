@@ -31,18 +31,20 @@ textarea {
 
 /*Switch*/
 
-.TriSea-technologies-Switch > input[type="checkbox"] {
+/*switch button*/
+
+.material-switch > input[type="checkbox"] {
     display: none;
 }
 
-.TriSea-technologies-Switch > label {
+.material-switch > label {
     cursor: pointer;
     height: 0px;
     position: relative;
     width: 40px;
 }
 
-    .TriSea-technologies-Switch > label::before {
+    .material-switch > label::before {
         background: rgb(0, 0, 0);
         box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
         border-radius: 8px;
@@ -55,7 +57,7 @@ textarea {
         width: 40px;
     }
 
-    .TriSea-technologies-Switch > label::after {
+    .material-switch > label::after {
         background: rgb(255, 255, 255);
         border-radius: 16px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
@@ -69,12 +71,12 @@ textarea {
         width: 24px;
     }
 
-.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::before {
+.material-switch > input[type="checkbox"]:checked + label::before {
     background: inherit;
     opacity: 0.5;
 }
 
-.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::after {
+.material-switch > input[type="checkbox"]:checked + label::after {
     background: inherit;
     left: 20px;
 }

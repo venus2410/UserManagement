@@ -78,10 +78,26 @@ namespace _67RoleBaseSecurity.DAL
         {
             try
             {
-                User user = mapper.Map<User>(model);
+                User user = new User();
 
                 //hash password
+                user.UserName= model.UserName;
                 user.Password = mD5Hash.ComputeMd5Hash(user.Password);
+                user.FirstName= model.FirstName;
+                user.LastName= model.LastName;
+                user.AliasName= model.AliasName;
+                user.Email= model.Email;
+                user.Phone= model.Phone;
+                user.Gender= model.Gender;
+                user.HiringDate= model.HiringDate;
+                user.BirthDay= model.BirthDay;
+                user.Address= model.Address;
+                user.JobTitle= model.JobTitle;
+                user.IsActive= model.IsActive;
+                user.CreateDate= model.CreateDate;
+                user.LastLoginDate= model.LastLoginDate;
+                user.LastUploadDate = model.LastUploadDate;
+                user.IsDeleted= model.IsDeleted;
 
                 //add user
                 db.Users.Add(user);
@@ -134,7 +150,10 @@ namespace _67RoleBaseSecurity.DAL
             try
             {
                 User user = db.Users.Find(model.UserId);
-                if (user == null) return false;
+                if (user == null)
+                {
+                    return false;
+                }
 
                 //User newUser = mapper.Map<User>(model);
                 //user = mapper.Map<User, User>(newUser);
